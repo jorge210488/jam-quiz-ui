@@ -2,7 +2,12 @@ import { defineNuxtConfig } from "nuxt/config";
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ["@nuxtjs/tailwindcss", "@nuxtjs/i18n"],
+  runtimeConfig: {
+    public: {
+      apiBase: process.env.API_BASE,
+    },
+  },
+  modules: ["@nuxtjs/tailwindcss", "@nuxtjs/i18n", "@pinia/nuxt"],
   i18n: {
     locales: [
       { code: "es", name: "Español", iso: "es-ES", file: "es.json" },

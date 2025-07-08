@@ -1,5 +1,8 @@
 {
-  "welcome": "Welcome!",
-  "start_quiz": "Start Quiz",
-  "logout": "Logout"
+  "light": "Light",
+  "dark": "Dark",
+  "neon": "Neon",
+  "Home": "Home",
+  "Quiz": "Quiz",
+  "Settings": "Settings"
 }

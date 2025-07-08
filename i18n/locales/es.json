@@ -1,5 +1,8 @@
 {
-  "welcome": "¡Bienvenido!",
-  "start_quiz": "Comenzar Quiz",
-  "logout": "Cerrar sesión"
+  "light": "Claro",
+  "dark": "Oscuro",
+  "neon": "Neón",
+  "Home": "Inicio",
+  "Quiz": "Cuestionario",
+  "Settings": "Configuración"
 }
