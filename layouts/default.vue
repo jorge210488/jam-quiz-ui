@@ -1,29 +1,35 @@
 <template>
-  <div :class="layoutClass" class="flex min-h-screen">
-    <Sidebar />
-    <div class="flex-1 p-6">
-      <div class="flex justify-between items-center mb-4">
-        <ThemeSwitcher />
-        <LanguageSwitcher />
+  <div>
+    <!-- Navbar fijo -->
+    <Navbar @showLogin="showLogin = true" />
+
+    <!-- Modal de Login -->
+    <LoginModal :isOpen="showLogin" @close="showLogin = false" />
+
+    <!-- Layout principal con sidebar -->
+    <div :class="layoutClass" class="flex min-h-screen">
+      <Sidebar />
+      <div class="flex-1 p-6">
+        <slot />
       </div>
-      <slot />
     </div>
   </div>
 </template>
 
 <script setup>
+import { ref, computed } from "vue";
 import { useUIStore } from "@/stores/ui";
-import Sidebar from "@/components/navbar/Sidebar.vue";
-import ThemeSwitcher from "@/components/ui/ThemeSwitcher.vue";
-import LanguageSwitcher from "@/components/ui/LanguageSwitcher.vue"; // 👈 nuevo
 
+import Sidebar from "@/components/navbar/Sidebar.vue";
+import Navbar from "@/components/navbar/Navbar.vue";
+import LoginModal from "@/components/modals/LoginModal.vue"; // Asegurate que el path esté bien
+
+const showLogin = ref(false);
 const ui = useUIStore();
 
-const layoutClass = computed(() => {
-  return {
-    "bg-white text-black": ui.theme === "light",
-    "bg-gray-900 text-white": ui.theme === "dark",
-    "bg-neon-bg text-neon-text": ui.theme === "neon",
-  };
-});
+const layoutClass = computed(() => ({
+  "bg-white text-black": ui.theme === "light",
+  "bg-gray-900 text-white": ui.theme === "dark",
+  "bg-neon-bg text-neon-text": ui.theme === "neon",
+}));
 </script>

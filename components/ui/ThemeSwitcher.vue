@@ -5,8 +5,11 @@
       :key="t"
       :class="buttonClass(t)"
       @click="changeTheme(t)"
+      :title="$t(t)"
     >
-      {{ $t(t) }}
+      <span>
+        {{ getIcon(t) }}
+      </span>
     </button>
   </div>
 </template>
@@ -19,6 +22,19 @@ const themes = ["light", "dark", "neon"] as const;
 
 const changeTheme = (theme: (typeof themes)[number]) => {
   ui.setTheme(theme);
+};
+
+const getIcon = (theme: string) => {
+  switch (theme) {
+    case "light":
+      return "🌞";
+    case "dark":
+      return "🌙";
+    case "neon":
+      return "🌈";
+    default:
+      return "❔";
+  }
 };
 
 const buttonClass = (theme: string) =>

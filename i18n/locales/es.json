@@ -1,8 +1,24 @@
 {
+  "General": "General",
+  "Home": "Inicio",
+  "Settings": "Configuración",
+  "Quizzes": "Cuestionarios",
+  "Live Quiz": "Cuestionario en Vivo",
+  "Create Quiz": "Crear Cuestionario",
+  "Open Quiz": "Abrir Cuestionario",
+  "Resultados": "Resultados",
+  "My History": "Mi Historial",
+  "Ranking": "Ranking",
+  "Badges": "Insignias",
+  "Feedback": "Retroalimentación",
+  "Question Feedback": "Sugerencia de Preguntas",
+  "Admin": "Administrador",
+  "Admin Dashboard": "Panel de Admin",
+  "Manage Quizzes": "Gestionar Cuestionarios",
+  "User Stats": "Estadísticas de Usuario",
   "light": "Claro",
   "dark": "Oscuro",
   "neon": "Neón",
-  "Home": "Inicio",
-  "Quiz": "Cuestionario",
-  "Settings": "Configuración"
+  "login": "Iniciar sesión",
+  "register": "Registrarse"
 }

@@ -1,8 +1,24 @@
 {
+  "General": "General",
+  "Home": "Home",
+  "Settings": "Settings",
+  "Quizzes": "Quizzes",
+  "Live Quiz": "Live Quiz",
+  "Create Quiz": "Create Quiz",
+  "Open Quiz": "Open Quiz",
+  "Resultados": "Results",
+  "My History": "My History",
+  "Ranking": "Ranking",
+  "Badges": "Badges",
+  "Feedback": "Feedback",
+  "Question Feedback": "Question Feedback",
+  "Admin": "Admin",
+  "Admin Dashboard": "Admin Dashboard",
+  "Manage Quizzes": "Manage Quizzes",
+  "User Stats": "User Stats",
   "light": "Light",
   "dark": "Dark",
   "neon": "Neon",
-  "Home": "Home",
-  "Quiz": "Quiz",
-  "Settings": "Settings"
+  "login": "Login",
+  "register": "Register"
 }
