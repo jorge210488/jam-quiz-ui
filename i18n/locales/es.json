@@ -19,6 +19,14 @@
   "light": "Claro",
   "dark": "Oscuro",
   "neon": "Neón",
-  "login": "Iniciar sesión",
+  "loginTitle": "Iniciar sesión",
+  "login": {
+    "title": "Iniciar sesión",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "emailPlaceholder": "",
+    "passwordPlaceholder": "••••••••",
+    "button": "Entrar"
+  },
   "register": "Registrarse"
 }

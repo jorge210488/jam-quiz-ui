@@ -50,7 +50,7 @@
           @click="emit('showLogin')"
           class="text-sm font-medium hover:underline"
         >
-          {{ $t("login") }}
+          {{ $t("loginTitle") }}
         </button>
         <NuxtLink
           to="/register"

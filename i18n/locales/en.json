@@ -19,6 +19,14 @@
   "light": "Light",
   "dark": "Dark",
   "neon": "Neon",
-  "login": "Login",
+  "loginTitle": "Sign In",
+  "login": {
+    "title": "Sign In",
+    "email": "Email",
+    "password": "Password",
+    "emailPlaceholder": "",
+    "passwordPlaceholder": "••••••••",
+    "button": "Enter"
+  },
   "register": "Register"
 }
