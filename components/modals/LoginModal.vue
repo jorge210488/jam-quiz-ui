@@ -111,7 +111,7 @@ const handleLogin = async () => {
     emit("close");
     router.push("/");
   } catch (err: any) {
-    alert("❌ Email o contraseña incorrectos");
+    alert("❌ " + t("login.error"));
   }
 };
 

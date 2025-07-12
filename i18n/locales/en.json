@@ -26,7 +26,23 @@
     "password": "Password",
     "emailPlaceholder": "",
     "passwordPlaceholder": "••••••••",
-    "button": "Enter"
+    "button": "Enter",
+    "error": "Incorrect email or password"
   },
-  "register": "Register"
+  "registerTitle": "Register",
+  "register": {
+    "title": "Create Account",
+    "name": "Name",
+    "namePlaceholder": "PlayerOne",
+    "email": "Email",
+    "emailPlaceholder": "",
+    "password": "Password",
+    "passwordPlaceholder": "Enter password",
+    "confirmPassword": "Confirm Password",
+    "confirmPasswordPlaceholder": "Repeat password",
+    "button": "Register",
+    "success": "Registration successful!",
+    "error": "Registration failed. Try again.",
+    "passwordMismatch": "Passwords do not match"
+  }
 }

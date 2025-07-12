@@ -52,12 +52,12 @@
         >
           {{ $t("loginTitle") }}
         </button>
-        <NuxtLink
-          to="/register"
+        <button
+          @click="emit('showRegister')"
           class="ml-3 text-sm font-medium hover:underline"
         >
-          {{ $t("register") }}
-        </NuxtLink>
+          {{ $t("registerTitle") }}
+        </button>
       </div>
     </div>
   </header>
@@ -70,7 +70,7 @@ import { useUserStore } from "@/stores/user";
 import { useUIStore } from "@/stores/ui";
 import { useI18n } from "vue-i18n";
 
-const emit = defineEmits(["showLogin"]);
+const emit = defineEmits(["showLogin", "showRegister"]);
 const userStore = useUserStore();
 const ui = useUIStore();
 const router = useRouter();

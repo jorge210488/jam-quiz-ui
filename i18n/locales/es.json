@@ -26,7 +26,23 @@
     "password": "Contraseña",
     "emailPlaceholder": "",
     "passwordPlaceholder": "••••••••",
-    "button": "Entrar"
+    "button": "Entrar",
+    "error": "Email o contraseña incorrectos"
   },
-  "register": "Registrarse"
+  "registerTitle": "Registrarse",
+  "register": {
+    "title": "Crear cuenta",
+    "name": "Nombre",
+    "namePlaceholder": "JugadorUno",
+    "email": "Correo electrónico",
+    "emailPlaceholder": "",
+    "password": "Contraseña",
+    "passwordPlaceholder": "Ingresa contraseña",
+    "confirmPassword": "Confirmar contraseña",
+    "confirmPasswordPlaceholder": "Repite contraseña",
+    "button": "Registrarse",
+    "success": "¡Registro exitoso!",
+    "error": "Fallo al registrar. Inténtalo de nuevo.",
+    "passwordMismatch": "Las contraseñas no coinciden"
+  }
 }

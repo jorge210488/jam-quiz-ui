@@ -17,7 +17,10 @@ export const useAuthService = () => {
   }) => {
     return await api("/auth/register", {
       method: "POST",
-      body: data,
+      body: {
+        ...data,
+        role: "player",
+      },
     });
   };
 
