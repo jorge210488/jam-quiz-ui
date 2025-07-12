@@ -44,5 +44,11 @@
     "success": "Registration successful!",
     "error": "Registration failed. Try again.",
     "passwordMismatch": "Passwords do not match"
+  },
+  "home": {
+    "title": "Welcome to JAM Quiz!",
+    "subtitle": "Challenge your knowledge with exciting quizzes and compete with friends.",
+    "cta1": "Start Playing",
+    "cta2": "Explore Quizzes"
   }
 }
