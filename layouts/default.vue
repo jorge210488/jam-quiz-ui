@@ -9,12 +9,12 @@
     <!-- Modal de Registro -->
     <RegisterModal :isOpen="showRegister" @close="showRegister = false" />
 
-    <!-- Layout principal con sidebar -->
-    <div :class="layoutClass" class="flex min-h-screen">
-      <Sidebar />
-      <div class="flex-1 p-6">
-        <slot />
-      </div>
+    <!-- Sidebar tipo hamburguesa (overlay) -->
+    <Sidebar />
+
+    <!-- Contenido principal -->
+    <div :class="layoutClass" class="min-h-screen p-6 pt-20">
+      <slot />
     </div>
   </div>
 </template>
