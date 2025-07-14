@@ -25,8 +25,8 @@ const { locale, setLocale } = useI18n();
 const i18nStore = useI18nStore();
 
 const locales = [
-  { code: "es" as const, name: "Español" },
-  { code: "en" as const, name: "English" },
+  { code: "es" as const, name: "ES" },
+  { code: "en" as const, name: "EN" },
 ];
 
 function changeLocale(code: "es" | "en") {

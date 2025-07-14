@@ -8,17 +8,23 @@
       ☰
     </button>
 
-    <!-- Fondo oscuro cuando se abre -->
+    <!-- Fondo oscuro con blur -->
     <div
       v-if="isOpen"
-      class="fixed inset-0 bg-black/50 z-40"
+      class="fixed inset-0 bg-black/70 backdrop-blur-sm z-40"
       @click="isOpen = false"
-    ></div>
+    >
+      <!-- Fondo decorativo opcional tipo stars.gif -->
+      <div
+        class="absolute inset-0 bg-[url('/images/stars.gif')] opacity-10 z-0"
+      />
+    </div>
 
-    <!-- Drawer lateral -->
+    <!-- Sidebar animado -->
     <aside
       :class="[
-        'fixed top-0 left-0 h-full w-64 bg-white dark:bg-gray-900 shadow-xl z-50 p-4 transform transition-transform duration-300 flex flex-col justify-between',
+        'fixed top-0 left-0 h-1/2 md:h-full w-fit border-r border-purple-600 rounded-r-2xl shadow-2xl z-50 p-4 transform transition-transform duration-300 flex flex-col justify-between',
+        sidebarBg,
         { 'translate-x-0': isOpen, '-translate-x-full': !isOpen },
       ]"
       :style="{ zIndex: 9999 }"
@@ -27,14 +33,14 @@
       <div class="flex justify-end mb-4">
         <button
           @click="isOpen = false"
-          class="text-2xl text-gray-500 dark:text-white"
+          class="text-2xl text-gray-400 hover:text-purple-400"
         >
           ✕
         </button>
       </div>
 
       <!-- Navegación -->
-      <nav class="space-y-6">
+      <nav class="space-y-6 font-gamer">
         <SidebarSection
           title="General"
           :items="[
@@ -79,9 +85,7 @@
       </nav>
 
       <!-- Switches -->
-      <div
-        class="mt-6 pt-4 border-t border-gray-200 dark:border-gray-700 space-y-4"
-      >
+      <div class="mt-6 pt-4 space-y-4">
         <ThemeSwitcher />
         <LanguageSwitcher />
       </div>
@@ -96,6 +100,25 @@ import SidebarSection from "@/components/navbar/SidebarSection.vue";
 import ThemeSwitcher from "@/components/ui/ThemeSwitcher.vue";
 import LanguageSwitcher from "@/components/ui/LanguageSwitcher.vue";
 
-const ui = useUIStore();
 const isOpen = ref(false);
+const ui = useUIStore();
+
+// Computed para el fondo según el tema
+const sidebarBg = computed(() => {
+  switch (ui.theme) {
+    case "light":
+      return "bg-white text-black";
+    case "neon":
+      return "bg-black text-neon-text";
+    default:
+      return "bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white";
+  }
+});
 </script>
+
+<style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
+.font-gamer {
+  font-family: "Press Start 2P", cursive;
+}
+</style>

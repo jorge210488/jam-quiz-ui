@@ -38,7 +38,7 @@ const getIcon = (theme: string) => {
 };
 
 const buttonClass = (theme: string) =>
-  `px-3 py-1 rounded text-sm transition ${
+  `px-1 py-1 rounded text-sm transition ${
     ui.theme === theme
       ? "bg-blue-600 text-white"
       : "bg-gray-200 dark:bg-gray-700"
