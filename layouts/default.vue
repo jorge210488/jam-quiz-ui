@@ -13,7 +13,7 @@
     <Sidebar />
 
     <!-- Contenido principal -->
-    <div :class="layoutClass" class="min-h-screen p-6 pt-20">
+    <div :class="layoutClass" class="min-h-screen">
       <slot />
     </div>
   </div>
