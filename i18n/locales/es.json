@@ -50,5 +50,23 @@
     "subtitle": "Desafía tu conocimiento con quizzes emocionantes y compite con amigos.",
     "cta1": "Comenzar a jugar",
     "cta2": "Explorar quizzes"
+  },
+  "profile": {
+    "title": "Editar Perfil",
+    "name": "Nombre",
+    "email": "Correo",
+    "password": "Contraseña",
+    "confirmPassword": "Confirmar Contraseña",
+    "rotateAvatar": "Cambiar avatar",
+    "updateButton": "Actualizar",
+    "delete": "Eliminar Cuenta",
+    "success": "Perfil actualizado exitosamente.",
+    "error": "Ocurrió un error al actualizar el perfil.",
+    "passwordMismatch": "Las contraseñas no coinciden.",
+    "confirmDelete": "¿Seguro que deseas eliminar tu cuenta?",
+    "namePlaceholder": "Tu nombre...",
+    "emailPlaceholder": "Tu correo...",
+    "passwordPlaceholder": "Nueva contraseña",
+    "confirmPasswordPlaceholder": "Confirma la contraseña"
   }
 }

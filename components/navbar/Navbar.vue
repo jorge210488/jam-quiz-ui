@@ -45,14 +45,19 @@
               <p class="px-4 py-2 text-sm">
                 {{ userStore.user.name }}
               </p>
-              <!-- Profile Link -->
-              <NuxtLink
-                to="/profile"
-                class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700"
+              <!-- Profile Modal Button -->
+              <button
+                @click="
+                  () => {
+                    showMenu = false;
+                    isProfileOpen = true;
+                  }
+                "
+                class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700"
               >
-                <!-- 👤 Perfil (icon optional) -->
                 {{ t("profile") }}
-              </NuxtLink>
+              </button>
+
               <!-- Logout Button -->
               <button
                 @click="logout"
@@ -83,6 +88,7 @@
       </div>
     </div>
   </header>
+  <ProfileModal :isOpen="isProfileOpen" @close="isProfileOpen = false" />
 </template>
 
 <script setup lang="ts">
@@ -91,6 +97,9 @@ import { useRouter } from "vue-router";
 import { useUserStore } from "@/stores/user";
 import { useUIStore } from "@/stores/ui";
 import { useI18n } from "vue-i18n";
+import ProfileModal from "@/components/modals/ProfileModal.vue";
+
+const isProfileOpen = ref(false);
 
 // Stores and utilities
 const userStore = useUserStore();
