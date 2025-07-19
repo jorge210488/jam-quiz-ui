@@ -68,5 +68,14 @@
     "emailPlaceholder": "Tu correo...",
     "passwordPlaceholder": "Nueva contraseña",
     "confirmPasswordPlaceholder": "Confirma la contraseña"
+  },
+  "quiz": {
+    "joinTitle": "Ingresar a Sala de Quiz",
+    "roomId": "ID de Sala",
+    "sessionId": "ID de Sesión",
+    "userId": "ID de Usuario",
+    "joinButton": "Entrar a Sala",
+    "startGame": "Iniciar Juego",
+    "validation": "Por favor completa todos los campos requeridos."
   }
 }

@@ -68,5 +68,12 @@
     "emailPlaceholder": "Your email...",
     "passwordPlaceholder": "New password",
     "confirmPasswordPlaceholder": "Confirm password"
+  },
+  "quiz": {
+    "joinTitle": "Join the Room",
+    "joinSubtitle": "Enter your nickname and get ready to start the trivia!",
+    "startGame": "Start Game",
+    "finalScore": "Final Score",
+    "playAgain": "Play Again"
   }
 }
