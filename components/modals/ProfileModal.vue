@@ -6,11 +6,12 @@
       @click.self="closeModal"
     >
       <div
-        class="absolute inset-0 bg-[url('/images/stars.gif')] opacity-20 z-0"
+        class="absolute inset-0 bg-[url('/images/stars.gif')] opacity-20 z-0 pointer-events-none"
       />
 
       <motion-div
-        class="relative z-10 bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white rounded-xl shadow-2xl p-6 w-[370px] border border-green-700"
+        class="relative z-10 rounded-xl shadow-2xl p-6 w-[370px] border font-gamer"
+        :class="modalClass"
         :initial="{ opacity: 0, y: -40, scale: 0.95 }"
         :enter="{
           opacity: 1,
@@ -28,14 +29,16 @@
         <!-- Botón de cierre -->
         <button
           @click="closeModal"
-          class="absolute top-3 right-3 text-gray-400 hover:text-green-400 text-2xl"
+          class="absolute top-3 right-3 text-2xl transition-colors"
+          :class="closeBtnClass"
         >
           ×
         </button>
 
         <!-- Título del modal -->
         <h2
-          class="text-2xl font-bold mb-6 text-center tracking-wide text-green-300 font-gamer"
+          class="text-2xl font-bold mb-6 text-center tracking-wide"
+          :class="titleClass"
         >
           👤 {{ t("profile.title") }}
         </h2>
@@ -71,54 +74,58 @@
         <form @submit.prevent="handleUpdate" class="space-y-4">
           <!-- Nombre -->
           <div>
-            <label class="block text-sm font-medium text-green-400 mb-1">
+            <label class="block text-sm font-medium mb-1" :class="labelClass">
               {{ t("profile.name") }}
             </label>
             <input
               v-model="form.name"
               type="text"
               required
-              class="w-full px-4 py-2 bg-black border border-green-600 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none text-white placeholder-gray-400"
+              class="w-full px-4 py-2 rounded-md focus:ring-2 focus:outline-none transition"
+              :class="inputClass"
               :placeholder="t('profile.namePlaceholder')"
             />
           </div>
 
           <!-- Email -->
           <div>
-            <label class="block text-sm font-medium text-green-400 mb-1">
+            <label class="block text-sm font-medium mb-1" :class="labelClass">
               {{ t("profile.email") }}
             </label>
             <input
               v-model="form.email"
               type="email"
               required
-              class="w-full px-4 py-2 bg-black border border-green-600 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none text-white placeholder-gray-400"
+              class="w-full px-4 py-2 rounded-md focus:ring-2 focus:outline-none transition"
+              :class="inputClass"
               :placeholder="t('profile.emailPlaceholder')"
             />
           </div>
 
           <!-- Contraseña -->
           <div>
-            <label class="block text-sm font-medium text-green-400 mb-1">
+            <label class="block text-sm font-medium mb-1" :class="labelClass">
               {{ t("profile.password") }}
             </label>
             <input
               v-model="form.password"
               type="password"
-              class="w-full px-4 py-2 bg-black border border-green-600 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none text-white placeholder-gray-400"
+              class="w-full px-4 py-2 rounded-md focus:ring-2 focus:outline-none transition"
+              :class="inputClass"
               :placeholder="t('profile.passwordPlaceholder')"
             />
           </div>
 
           <!-- Confirmar Contraseña -->
           <div>
-            <label class="block text-sm font-medium text-green-400 mb-1">
+            <label class="block text-sm font-medium mb-1" :class="labelClass">
               {{ t("profile.confirmPassword") }}
             </label>
             <input
               v-model="confirmPassword"
               type="password"
-              class="w-full px-4 py-2 bg-black border border-green-600 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none text-white placeholder-gray-400"
+              class="w-full px-4 py-2 rounded-md focus:ring-2 focus:outline-none transition"
+              :class="inputClass"
               :placeholder="t('profile.confirmPasswordPlaceholder')"
             />
           </div>
@@ -127,7 +134,8 @@
           <motion-div :hover="{ scale: 1.05 }" :tap="{ scale: 0.95 }">
             <button
               type="submit"
-              class="w-full bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 text-white py-2 mt-2 rounded-md font-bold shadow-md hover:shadow-green-400/60 transition duration-300 flex items-center justify-center"
+              class="w-full py-2 mt-2 rounded-md font-bold shadow-md flex items-center justify-center transition duration-300"
+              :class="submitBtnClass"
             >
               💾 {{ t("profile.updateButton") }}
             </button>
@@ -157,6 +165,7 @@ import { useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { useUserStore } from "@/stores/user";
 import { useUserService } from "@/services/userService";
+import { useUIStore } from "@/stores/ui";
 
 const { t } = useI18n();
 const props = defineProps<{ isOpen: boolean }>();
@@ -164,14 +173,14 @@ const emit = defineEmits(["close"]);
 const router = useRouter();
 const { updateUser } = useUserService();
 const userStore = useUserStore();
+const ui = useUIStore();
+
 onMounted(() => {
   userStore.loadFromStorage();
 });
 
-// Datos actuales del usuario
 const user = computed(() => userStore.user);
 
-// Formulario con valores iniciales (email y nombre actuales)
 const form = ref({
   name: user.value?.name || "",
   email: user.value?.email || "",
@@ -179,7 +188,7 @@ const form = ref({
 });
 const confirmPassword = ref("");
 
-// Lógica para el avatar (inicial y rotación/color aleatorio)
+// Avatar
 const rotateDegrees = ref(0);
 const avatarColors = [
   "bg-green-500",
@@ -194,19 +203,17 @@ const userInitial = computed(() =>
 
 function rotateAvatar() {
   rotateDegrees.value += 360;
-  // Cambia a un color aleatorio de la lista
   currentColor.value =
     avatarColors[Math.floor(Math.random() * avatarColors.length)];
 }
 
-// Maneja la actualización de datos de perfil
+// Actualizar usuario
 const handleUpdate = async () => {
   if (form.value.password !== confirmPassword.value) {
     alert("❌ " + t("profile.passwordMismatch"));
     return;
   }
 
-  // Construye los campos a enviar (solo si no están vacíos)
   const payload: { name?: string; email?: string; password?: string } = {};
   if (form.value.name.trim()) payload.name = form.value.name.trim();
   if (form.value.email.trim()) payload.email = form.value.email.trim();
@@ -230,18 +237,92 @@ const handleUpdate = async () => {
   }
 };
 
-// Maneja la eliminación de cuenta (cierra sesión)
 const handleDelete = () => {
   if (confirm(t("profile.confirmDelete"))) {
     userStore.logout();
     emit("close");
-    router.push("/"); // Redirige, por ejemplo, a la página de inicio o login
+    router.push("/");
   }
 };
 
 const closeModal = () => {
   emit("close");
 };
+
+/* ---------------------------
+ *  THEME CLASSES
+ * --------------------------- */
+const modalClass = computed(() => {
+  switch (ui.theme) {
+    case "light":
+      return "bg-white text-black border-green-600";
+    case "neon":
+      return "bg-neon-bg text-neon-text border-neon-green";
+    case "dark":
+    default:
+      return "bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white border-green-700";
+  }
+});
+
+const titleClass = computed(() => {
+  switch (ui.theme) {
+    case "light":
+      return "text-green-600";
+    case "neon":
+      return "text-neon-green";
+    case "dark":
+    default:
+      return "text-green-300";
+  }
+});
+
+const labelClass = computed(() => {
+  switch (ui.theme) {
+    case "light":
+      return "text-green-600";
+    case "neon":
+      return "text-neon-green";
+    case "dark":
+    default:
+      return "text-green-400";
+  }
+});
+
+const inputClass = computed(() => {
+  switch (ui.theme) {
+    case "light":
+      return "bg-white border border-green-400 text-black placeholder-gray-500 focus:ring-green-500";
+    case "neon":
+      return "bg-black border border-neon-green text-neon-text placeholder-neon-green/60 focus:ring-neon-green";
+    case "dark":
+    default:
+      return "bg-black border border-green-600 text-white placeholder-gray-400 focus:ring-green-500";
+  }
+});
+
+const submitBtnClass = computed(() => {
+  switch (ui.theme) {
+    case "light":
+      return "bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 text-white hover:shadow-green-400/60";
+    case "neon":
+      return "bg-neon-glow/20 border border-neon-green text-neon-text hover:bg-neon-glow/40 hover:shadow-neon-green/60";
+    case "dark":
+    default:
+      return "bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 text-white hover:shadow-green-400/60";
+  }
+});
+
+const closeBtnClass = computed(() => {
+  switch (ui.theme) {
+    case "light":
+      return "text-gray-500 hover:text-green-600";
+    case "neon":
+      return "text-neon-text/70 hover:text-neon-green";
+    case "dark":
+    default:
+      return "text-gray-400 hover:text-green-400";
+  }
+});
 </script>
 
 <style scoped>
