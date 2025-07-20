@@ -75,5 +75,9 @@
     "startGame": "Start Game",
     "finalScore": "Final Score",
     "playAgain": "Play Again"
+  },
+  "quizzes": {
+    "selectTitle": "Select a quiz to play",
+    "playNow": "Play now"
   }
 }

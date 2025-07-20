@@ -5,11 +5,11 @@ type Quiz = {
   title: string;
   description?: string;
   createdBy: {
-    username: string;
+    _id: string;
   };
   isActive: boolean;
-  isLive: boolean;
-  isOpen: boolean;
+  isLive?: boolean;
+  isOpen?: boolean;
   createdAt: string;
   updatedAt: string;
 };
@@ -36,28 +36,24 @@ export const useQuizService = () => {
     },
   });
 
-  // Obtener todos los quizzes
   const getAllQuizzes = async (): Promise<Quiz[]> => {
     return await api("/quizzes", {
       method: "GET",
     });
   };
 
-  // Obtener quizzes activos
   const getActiveQuizzes = async (): Promise<Quiz[]> => {
     return await api("/quizzes/active", {
       method: "GET",
     });
   };
 
-  // Obtener un quiz por ID (incluye preguntas)
   const getQuizById = async (id: string): Promise<QuizWithQuestions> => {
     return await api(`/quizzes/${id}`, {
       method: "GET",
     });
   };
 
-  // Crear un nuevo quiz
   const createQuiz = async (data: {
     title: string;
     description?: string;
@@ -72,7 +68,6 @@ export const useQuizService = () => {
     });
   };
 
-  // Actualizar un quiz existente (y agregar preguntas si se envían)
   const updateQuiz = async (
     id: string,
     data: {
