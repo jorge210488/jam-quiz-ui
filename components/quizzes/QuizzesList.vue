@@ -9,6 +9,7 @@
       <h2 class="text-xl font-bold mb-2">{{ quiz.title }}</h2>
       <p class="text-sm text-gray-300 mb-4">{{ quiz.description }}</p>
       <button
+        @click="$emit('play-now', quiz._id)"
         class="bg-gradient-to-r from-pink-500 via-purple-600 to-indigo-600 hover:scale-105 transition px-5 py-2 rounded-xl font-bold text-white"
       >
         🎮 {{ t("quizzes.playNow") }}
@@ -21,13 +22,17 @@
 import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 import { useUIStore } from "@/stores/ui";
-import type { Quiz } from "@/types/quiz"; // ✅ tipado importado
+import type { Quiz } from "@/types/quiz";
 
 const { t } = useI18n();
 const ui = useUIStore();
 
 defineProps<{
-  quizzes: Quiz[]; // ✅ tipado correcto
+  quizzes: Quiz[];
+}>();
+
+const emit = defineEmits<{
+  (e: "play-now", quizId: string): void;
 }>();
 
 const cardClass = computed(() => {

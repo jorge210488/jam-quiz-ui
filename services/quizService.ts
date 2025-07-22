@@ -1,30 +1,13 @@
+// services/quizService.ts
+import type { Quiz } from "@/types/quiz";
+import type { Question } from "@/types/question";
+import { useNuxtApp } from "#app";
 import { useUserStore } from "@/stores/user";
 
-type Quiz = {
-  _id: string;
-  title: string;
-  description?: string;
-  createdBy: {
-    _id: string;
-  };
-  isActive: boolean;
-  isLive?: boolean;
-  isOpen?: boolean;
-  createdAt: string;
-  updatedAt: string;
-};
-
-type Question = {
-  _id?: string;
-  questionText: string;
-  options: string[];
-  correctAnswer: string;
-};
-
-type QuizWithQuestions = {
+export interface QuizWithQuestions {
   quiz: Quiz;
   questions: Question[];
-};
+}
 
 export const useQuizService = () => {
   const api = useNuxtApp().$api;
@@ -37,21 +20,15 @@ export const useQuizService = () => {
   });
 
   const getAllQuizzes = async (): Promise<Quiz[]> => {
-    return await api("/quizzes", {
-      method: "GET",
-    });
+    return await api("/quizzes", { method: "GET" });
   };
 
   const getActiveQuizzes = async (): Promise<Quiz[]> => {
-    return await api("/quizzes/active", {
-      method: "GET",
-    });
+    return await api("/quizzes/active", { method: "GET" });
   };
 
   const getQuizById = async (id: string): Promise<QuizWithQuestions> => {
-    return await api(`/quizzes/${id}`, {
-      method: "GET",
-    });
+    return await api(`/quizzes/${id}`, { method: "GET" });
   };
 
   const createQuiz = async (data: {

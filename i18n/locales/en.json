@@ -79,5 +79,13 @@
   "quizzes": {
     "selectTitle": "Select a quiz to play",
     "playNow": "Play now"
+  },
+  "game": {
+    "playersCount": "Players joined: {count}",
+    "waitingForPlayers": "Waiting for other players...",
+    "startGame": "Start Game",
+    "endGame": "End Game",
+    "playerJoined": "{name} joined the game!",
+    "finished": "The quiz has finished!"
   }
 }

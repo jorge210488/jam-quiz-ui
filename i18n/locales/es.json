@@ -81,5 +81,13 @@
   "quizzes": {
     "selectTitle": "Selecciona un quiz para jugar",
     "playNow": "Jugar ahora"
+  },
+  "game": {
+    "playersCount": "Jugadores unidos: {count}",
+    "waitingForPlayers": "Esperando a otros jugadores...",
+    "startGame": "Iniciar Juego",
+    "endGame": "Terminar Juego",
+    "playerJoined": "¡{name} se ha unido al juego!",
+    "finished": "¡El quiz ha terminado!"
   }
 }
