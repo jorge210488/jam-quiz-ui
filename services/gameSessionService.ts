@@ -29,7 +29,7 @@ export const useGameSessionService = () => {
   };
 
   const getGameSessionById = async (id: string): Promise<GameSession> => {
-    return await api(`/gamesessions/${id}`, {
+    return await api(`/game-sessions/${id}`, {
       method: "GET",
       ...authHeaders(),
     });
@@ -39,7 +39,7 @@ export const useGameSessionService = () => {
     sessionId: string,
     data: GameSessionResponse
   ): Promise<{ message: string; session: GameSession }> => {
-    return await api(`/gamesessions/${sessionId}/responses`, {
+    return await api(`/game-sessions/${sessionId}/responses`, {
       method: "POST",
       body: data,
       ...authHeaders(),
@@ -49,7 +49,7 @@ export const useGameSessionService = () => {
   const getSessionsByUser = async (
     userId: string
   ): Promise<GameSessionSummary[]> => {
-    return await api(`/gamesessions?userId=${userId}`, {
+    return await api(`/game-sessions?userId=${userId}`, {
       method: "GET",
       ...authHeaders(),
     });
@@ -58,7 +58,7 @@ export const useGameSessionService = () => {
   const finishGameSession = async (
     sessionId: string
   ): Promise<{ message: string; session: GameSession }> => {
-    return await api(`/gamesessions/${sessionId}/finish`, {
+    return await api(`/game-sessions/${sessionId}/finish`, {
       method: "PUT",
       ...authHeaders(),
     });
@@ -68,9 +68,27 @@ export const useGameSessionService = () => {
     sessionId: string,
     userId: string
   ): Promise<{ message: string; session: GameSession }> => {
-    return await api(`/gamesessions/${sessionId}/join`, {
+    return await api(`/game-sessions/${sessionId}/join`, {
       method: "POST",
       body: { userId },
+      ...authHeaders(),
+    });
+  };
+
+  const getSessionsByQuizId = async (
+    quizId: string
+  ): Promise<GameSession[]> => {
+    return await api(`/game-sessions/quiz/${quizId}`, {
+      method: "GET",
+      ...authHeaders(),
+    });
+  };
+
+  const deleteGameSession = async (
+    sessionId: string
+  ): Promise<{ message: string }> => {
+    return await api(`/game-sessions/${sessionId}`, {
+      method: "DELETE",
       ...authHeaders(),
     });
   };
@@ -82,5 +100,7 @@ export const useGameSessionService = () => {
     getSessionsByUser,
     finishGameSession,
     joinSession,
+    getSessionsByQuizId,
+    deleteGameSession,
   };
 };

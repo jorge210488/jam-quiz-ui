@@ -83,11 +83,18 @@
     "playNow": "Jugar ahora"
   },
   "game": {
-    "playersCount": "Jugadores unidos: {count}",
-    "waitingForPlayers": "Esperando a otros jugadores...",
+    "joinOrCreate": "Unirse o Crear una Partida",
+    "sessionBy": "Anfitrión",
+    "players": "jugadores",
+    "joinSession": "Unirse a la Partida",
+    "createNewSession": "Crear Nueva Partida",
+    "backToQuizzes": "Volver a los Cuestionarios",
+    "playerJoined": "¡{name} se unió al juego!",
+    "playersCount": "{count} jugadores en la sala",
+    "waitingForPlayers": "Esperando a más jugadores...",
     "startGame": "Iniciar Juego",
     "endGame": "Terminar Juego",
-    "playerJoined": "¡{name} se ha unido al juego!",
-    "finished": "¡El quiz ha terminado!"
+    "finished": "🎉 ¡Juego Terminado!",
+    "timeAgo": "hace {time}"
   }
 }

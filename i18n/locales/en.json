@@ -81,11 +81,18 @@
     "playNow": "Play now"
   },
   "game": {
-    "playersCount": "Players joined: {count}",
-    "waitingForPlayers": "Waiting for other players...",
+    "joinOrCreate": "Join or Create a Game",
+    "sessionBy": "Hosted by",
+    "players": "players",
+    "joinSession": "Join Session",
+    "createNewSession": "Create New Session",
+    "backToQuizzes": "Back to Quizzes",
+    "playerJoined": "{name} joined the game!",
+    "playersCount": "{count} players in the room",
+    "waitingForPlayers": "Waiting for more players...",
     "startGame": "Start Game",
     "endGame": "End Game",
-    "playerJoined": "{name} joined the game!",
-    "finished": "The quiz has finished!"
+    "finished": "🎉 Game Finished!",
+    "timeAgo": "{time} ago"
   }
 }
