@@ -1,123 +1,119 @@
 <template>
   <Teleport to="body">
     <div
-      v-if="isOpen"
+      v-show="isOpen"
       class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
       @click.self="closeModal"
     >
+      <!-- Fondo decorativo opcional -->
       <div
         class="absolute inset-0 bg-[url('/images/stars.gif')] opacity-20 z-0 pointer-events-none"
       />
 
-      <motion
-        tag="div"
-        class="relative z-10 rounded-xl shadow-2xl p-6 w-[370px] border font-gamer"
-        :class="modalClass"
-        :initial="{ opacity: 0, y: -40, scale: 0.95 }"
-        :enter="{
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          transition: { type: 'spring', stiffness: 300 },
-        }"
-        :leave="{
-          opacity: 0,
-          y: -40,
-          scale: 0.95,
-          transition: { duration: 0.3 },
-        }"
+      <!-- Animación de entrada/salida con Transition nativa -->
+      <Transition
+        enter-active-class="transition transform duration-300 ease-out"
+        enter-from-class="opacity-0 -translate-y-10 scale-95"
+        enter-to-class="opacity-100 translate-y-0 scale-100"
+        leave-active-class="transition transform duration-200 ease-in"
+        leave-from-class="opacity-100 translate-y-0 scale-100"
+        leave-to-class="opacity-0 -translate-y-10 scale-95"
       >
-        <!-- Botón de cerrar -->
-        <button
-          @click="closeModal"
-          class="absolute top-3 right-3 text-2xl transition-colors"
-          :class="closeBtnClass"
+        <div
+          v-show="isOpen"
+          class="relative z-10 rounded-xl shadow-2xl p-6 w-[370px] border font-gamer"
+          :class="modalClass"
         >
-          ×
-        </button>
+          <!-- Botón de cerrar -->
+          <button
+            @click="closeModal"
+            class="absolute top-3 right-3 text-2xl transition-colors"
+            :class="closeBtnClass"
+          >
+            ×
+          </button>
 
-        <!-- Título -->
-        <h2
-          class="text-2xl font-bold mb-6 text-center tracking-wide"
-          :class="titleClass"
-        >
-          🌟 {{ t("register.title") }}
-        </h2>
+          <!-- Título -->
+          <h2
+            class="text-2xl font-bold mb-6 text-center tracking-wide"
+            :class="titleClass"
+          >
+            🌟 {{ t("register.title") }}
+          </h2>
 
-        <!-- Formulario -->
-        <form @submit.prevent="handleRegister" class="space-y-4">
-          <!-- Name -->
-          <div>
-            <label class="block text-sm font-medium mb-1" :class="labelClass">
-              {{ t("register.name") }}
-            </label>
-            <input
-              v-model="form.name"
-              type="text"
-              required
-              class="w-full px-4 py-2 rounded-md focus:ring-2 focus:outline-none transition"
-              :class="inputClass"
-              :placeholder="t('register.namePlaceholder')"
-            />
-          </div>
+          <!-- Formulario sin motion extra -->
+          <form @submit.prevent="handleRegister" class="space-y-4">
+            <!-- Name -->
+            <div>
+              <label class="block text-sm font-medium mb-1" :class="labelClass">
+                {{ t("register.name") }}
+              </label>
+              <input
+                v-model="form.name"
+                type="text"
+                required
+                class="w-full px-4 py-2 rounded-md focus:ring-2 focus:outline-none transition"
+                :class="inputClass"
+                :placeholder="t('register.namePlaceholder')"
+              />
+            </div>
 
-          <!-- Email -->
-          <div>
-            <label class="block text-sm font-medium mb-1" :class="labelClass">
-              {{ t("register.email") }}
-            </label>
-            <input
-              v-model="form.email"
-              type="email"
-              required
-              class="w-full px-4 py-2 rounded-md focus:ring-2 focus:outline-none transition"
-              :class="inputClass"
-              :placeholder="t('register.emailPlaceholder')"
-            />
-          </div>
+            <!-- Email -->
+            <div>
+              <label class="block text-sm font-medium mb-1" :class="labelClass">
+                {{ t("register.email") }}
+              </label>
+              <input
+                v-model="form.email"
+                type="email"
+                required
+                class="w-full px-4 py-2 rounded-md focus:ring-2 focus:outline-none transition"
+                :class="inputClass"
+                :placeholder="t('register.emailPlaceholder')"
+              />
+            </div>
 
-          <!-- Password -->
-          <div>
-            <label class="block text-sm font-medium mb-1" :class="labelClass">
-              {{ t("register.password") }}
-            </label>
-            <input
-              v-model="form.password"
-              type="password"
-              required
-              class="w-full px-4 py-2 rounded-md focus:ring-2 focus:outline-none transition"
-              :class="inputClass"
-              :placeholder="t('register.passwordPlaceholder')"
-            />
-          </div>
+            <!-- Password -->
+            <div>
+              <label class="block text-sm font-medium mb-1" :class="labelClass">
+                {{ t("register.password") }}
+              </label>
+              <input
+                v-model="form.password"
+                type="password"
+                required
+                class="w-full px-4 py-2 rounded-md focus:ring-2 focus:outline-none transition"
+                :class="inputClass"
+                :placeholder="t('register.passwordPlaceholder')"
+              />
+            </div>
 
-          <!-- Confirm Password -->
-          <div>
-            <label class="block text-sm font-medium mb-1" :class="labelClass">
-              {{ t("register.confirmPassword") }}
-            </label>
-            <input
-              v-model="confirmPassword"
-              type="password"
-              required
-              class="w-full px-4 py-2 rounded-md focus:ring-2 focus:outline-none transition"
-              :class="inputClass"
-              :placeholder="t('register.confirmPasswordPlaceholder')"
-            />
-          </div>
+            <!-- Confirm Password -->
+            <div>
+              <label class="block text-sm font-medium mb-1" :class="labelClass">
+                {{ t("register.confirmPassword") }}
+              </label>
+              <input
+                v-model="confirmPassword"
+                type="password"
+                required
+                class="w-full px-4 py-2 rounded-md focus:ring-2 focus:outline-none transition"
+                :class="inputClass"
+                :placeholder="t('register.confirmPasswordPlaceholder')"
+              />
+            </div>
 
-          <!-- Botón de enviar -->
-          <motion tag="div" :hover="{ scale: 1.05 }" :tap="{ scale: 0.95 }">
+            <!-- Botón de enviar con solo CSS para hover/active -->
             <button
               type="submit"
-              class="w-full py-2 mt-2 rounded-md font-bold shadow-md flex items-center justify-center transition duration-300"
+              class="w-full py-2 mt-2 rounded-md font-bold shadow-md flex items-center justify-center transform transition-transform duration-200 hover:scale-105 active:scale-95"
               :class="submitBtnClass"
             >
               💾 {{ t("register.button") }}
             </button>
-          </motion>
-        </form>
-      </motion>
+          </form>
+        </div>
+      </Transition>
     </div>
   </Teleport>
 </template>
@@ -173,7 +169,6 @@ const modalClass = computed(() => {
       return "bg-white text-black border-green-600";
     case "neon":
       return "bg-neon-bg text-neon-text border-neon-green";
-    case "dark":
     default:
       return "bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white border-green-700";
   }
@@ -185,7 +180,6 @@ const titleClass = computed(() => {
       return "text-green-600";
     case "neon":
       return "text-neon-green";
-    case "dark":
     default:
       return "text-green-300";
   }
@@ -197,7 +191,6 @@ const labelClass = computed(() => {
       return "text-green-600";
     case "neon":
       return "text-neon-green";
-    case "dark":
     default:
       return "text-green-400";
   }
@@ -209,7 +202,6 @@ const inputClass = computed(() => {
       return "bg-white border border-green-400 text-black placeholder-gray-500 focus:ring-green-500";
     case "neon":
       return "bg-black border border-neon-green text-neon-text placeholder-neon-green/60 focus:ring-neon-green";
-    case "dark":
     default:
       return "bg-black border border-green-600 text-white placeholder-gray-400 focus:ring-green-500";
   }
@@ -221,7 +213,6 @@ const submitBtnClass = computed(() => {
       return "bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 text-white hover:shadow-green-400/60";
     case "neon":
       return "bg-neon-glow/20 border border-neon-green text-neon-text hover:bg-neon-glow/40 hover:shadow-neon-green/60";
-    case "dark":
     default:
       return "bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 text-white hover:shadow-green-400/60";
   }
@@ -233,7 +224,6 @@ const closeBtnClass = computed(() => {
       return "text-gray-500 hover:text-green-600";
     case "neon":
       return "text-neon-text/70 hover:text-neon-green";
-    case "dark":
     default:
       return "text-gray-400 hover:text-green-400";
   }

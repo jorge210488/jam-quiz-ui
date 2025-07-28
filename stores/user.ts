@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 
-type User = {
+export type User = {
   id: string;
   name: string;
   email: string;
