@@ -94,5 +94,24 @@
     "endGame": "End Game",
     "finished": "🎉 Game Finished!",
     "timeAgo": "{time} ago"
+  },
+  "sidebar": {
+    "general": "General",
+    "quizzes": "Quizzes",
+    "results": "Results",
+    "feedback": "Feedback",
+    "admin": "Admin",
+    "home": "Home",
+    "settings": "Settings",
+    "liveQuiz": "Live Quiz",
+    "createQuiz": "Create Quiz",
+    "openQuiz": "Open Quiz",
+    "myHistory": "My History",
+    "ranking": "Ranking",
+    "badges": "Badges",
+    "feedbackItem": "Question Feedback",
+    "adminDashboard": "Dashboard",
+    "manageQuizzes": "Quizzes",
+    "userStats": "User Stats"
   }
 }

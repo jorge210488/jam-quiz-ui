@@ -1,14 +1,14 @@
 <template>
-  <div class="flex gap-2">
+  <div class="flex justify-center gap-2">
     <button
       v-for="lang in locales"
       :key="lang.code"
       @click="changeLocale(lang.code)"
       :class="[
-        'px-3 py-1 rounded text-sm transition',
+        'px-3 py-1 rounded text-xs md:text-sm transition',
         locale === lang.code
           ? 'bg-blue-600 text-white'
-          : 'bg-gray-200 dark:bg-gray-700',
+          : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200',
       ]"
     >
       {{ lang.name }}
@@ -40,5 +40,6 @@ watch(
   }
 );
 
+// Al montar, sincroniza el i18n interno con el store
 setLocale(i18nStore.locale);
 </script>

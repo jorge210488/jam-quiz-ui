@@ -1,5 +1,5 @@
 <template>
-  <div class="flex gap-2">
+  <div class="flex justify-center gap-2">
     <button
       v-for="t in themes"
       :key="t"
@@ -7,9 +7,7 @@
       @click="changeTheme(t)"
       :title="$t(t)"
     >
-      <span>
-        {{ getIcon(t) }}
-      </span>
+      <span>{{ getIcon(t) }}</span>
     </button>
   </div>
 </template>
