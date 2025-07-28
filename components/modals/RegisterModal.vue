@@ -9,7 +9,8 @@
         class="absolute inset-0 bg-[url('/images/stars.gif')] opacity-20 z-0 pointer-events-none"
       />
 
-      <motion-div
+      <motion
+        tag="div"
         class="relative z-10 rounded-xl shadow-2xl p-6 w-[370px] border font-gamer"
         :class="modalClass"
         :initial="{ opacity: 0, y: -40, scale: 0.95 }"
@@ -106,7 +107,7 @@
           </div>
 
           <!-- Botón de enviar -->
-          <motion-div :hover="{ scale: 1.05 }" :tap="{ scale: 0.95 }">
+          <motion tag="div" :hover="{ scale: 1.05 }" :tap="{ scale: 0.95 }">
             <button
               type="submit"
               class="w-full py-2 mt-2 rounded-md font-bold shadow-md flex items-center justify-center transition duration-300"
@@ -114,9 +115,9 @@
             >
               💾 {{ t("register.button") }}
             </button>
-          </motion-div>
+          </motion>
         </form>
-      </motion-div>
+      </motion>
     </div>
   </Teleport>
 </template>

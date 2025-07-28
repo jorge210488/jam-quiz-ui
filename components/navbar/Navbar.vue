@@ -106,16 +106,15 @@ const userStore = useUserStore();
 const ui = useUIStore();
 const router = useRouter();
 const { t } = useI18n();
+const emit = defineEmits(["showLogin", "showRegister"]);
 
 // Reactive state for dropdown menu
 const showMenu = ref(false);
 
-// Derive avatar URL (game character or default) for logged-in user
-// (If you have a user profile avatar, use that; otherwise use a placeholder or dynamic image)
+// Derive avatar URL based on avatarSeed from store
 const userAvatarUrl = computed(() => {
-  const seed = userStore.user?.id || "guest";
   return `https://api.dicebear.com/6.x/bottts/svg?seed=${encodeURIComponent(
-    seed
+    userStore.avatarSeed
   )}`;
 });
 

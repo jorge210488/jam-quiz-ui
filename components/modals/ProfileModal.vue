@@ -45,19 +45,16 @@
 
         <!-- Avatar actual y botón de rotar -->
         <div class="flex justify-center mb-4">
-          <motion-div
+          <motion
             :animate="{ rotate: rotateDegrees }"
             :transition="{ duration: 0.5 }"
           >
-            <div
-              :class="[
-                currentColor,
-                'h-16 w-16 flex items-center justify-center rounded-full text-white text-xl font-bold',
-              ]"
-            >
-              {{ userInitial }}
-            </div>
-          </motion-div>
+            <img
+              :src="userAvatarUrl"
+              class="w-16 h-16 rounded-full border-2 border-white shadow-md"
+              alt="avatar"
+            />
+          </motion>
         </div>
         <div class="flex justify-center mb-6">
           <motion-div :hover="{ scale: 1.05 }">
@@ -175,6 +172,12 @@ const { updateUser } = useUserService();
 const userStore = useUserStore();
 const ui = useUIStore();
 
+const userAvatarUrl = computed(() => {
+  return `https://api.dicebear.com/6.x/bottts/svg?seed=${encodeURIComponent(
+    userStore.avatarSeed
+  )}`;
+});
+
 onMounted(() => {
   userStore.loadFromStorage();
 });
@@ -201,10 +204,14 @@ const userInitial = computed(() =>
   user.value?.name ? user.value.name.charAt(0).toUpperCase() : ""
 );
 
+function generateRandomSeed() {
+  return Math.random().toString(36).substring(2, 10);
+}
+
 function rotateAvatar() {
   rotateDegrees.value += 360;
-  currentColor.value =
-    avatarColors[Math.floor(Math.random() * avatarColors.length)];
+  const newSeed = generateRandomSeed();
+  userStore.updateAvatarSeed(newSeed);
 }
 
 // Actualizar usuario
