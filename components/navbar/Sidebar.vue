@@ -106,7 +106,7 @@ const generalItems = computed(() => [
   { icon: "🏠", label: t("sidebar.home"), path: "/" },
 ]);
 const quizItems = computed(() => [
-  { icon: "🧠", label: t("sidebar.liveQuiz"), path: "/livequiz" },
+  { icon: "🧠", label: t("sidebar.liveQuiz"), path: "/quizzes" },
   { icon: "✍️", label: t("sidebar.createQuiz"), path: "/createquiz" },
 ]);
 const resultsItems = computed(() => [
