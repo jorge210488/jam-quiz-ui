@@ -1,5 +1,6 @@
 // services/userService.ts
 import { useUserStore } from "@/stores/user";
+import type { User } from "@/types/user"; // ✅ AÑADIDO
 
 type UpdateUserResponse = {
   user: {
@@ -28,7 +29,8 @@ export const useUserService = () => {
     });
   };
 
-  const getUserById = async (id: string) => {
+  // ✅ Tipado agregado correctamente
+  const getUserById = async (id: string): Promise<{ user: User }> => {
     return await api(`/users/${id}`, {
       method: "GET",
       ...authHeaders(),
@@ -58,10 +60,19 @@ export const useUserService = () => {
     });
   };
 
+  const assignBadgeToUser = async (userId: string, badgeId: string) => {
+    return await api(`/users/${userId}/badges`, {
+      method: "POST",
+      body: { badgeId },
+      ...authHeaders(),
+    });
+  };
+
   return {
     getAllUsers,
     getUserById,
     updateUser,
     deleteUser,
+    assignBadgeToUser,
   };
 };

@@ -113,5 +113,10 @@
     "adminDashboard": "Dashboard",
     "manageQuizzes": "Quizzes",
     "userStats": "User Stats"
+  },
+  "badges": {
+    "title": "Your Badges",
+    "earnedBy": "Badges earned by {name}",
+    "noBadges": "No badges earned yet"
   }
 }

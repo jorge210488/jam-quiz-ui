@@ -115,5 +115,10 @@
     "endGame": "Terminar Juego",
     "finished": "🎉 ¡Juego Terminado!",
     "timeAgo": "hace {time}"
+  },
+  "badges": {
+    "title": "Tus Insignias",
+    "earnedBy": "Insignias obtenidas por {name}",
+    "noBadges": "Aún no tienes insignias"
   }
 }
