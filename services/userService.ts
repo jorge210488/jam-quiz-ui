@@ -1,6 +1,6 @@
 // services/userService.ts
 import { useUserStore } from "@/stores/user";
-import type { User } from "@/types/user"; // ✅ AÑADIDO
+import type { User } from "@/types/user";
 
 type UpdateUserResponse = {
   user: {
@@ -60,8 +60,8 @@ export const useUserService = () => {
     });
   };
 
-  const assignBadgeToUser = async (userId: string, badgeId: string) => {
-    return await api(`/users/${userId}/badges`, {
+  const assignBadgeToUser = async (id: string, badgeId: string) => {
+    return await api(`/users/${id}/badges`, {
       method: "POST",
       body: { badgeId },
       ...authHeaders(),

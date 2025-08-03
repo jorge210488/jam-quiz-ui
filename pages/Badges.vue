@@ -19,11 +19,11 @@
         >
           <div
             v-for="badge in user.badges"
-            :key="badge.id"
+            :key="badge._id"
             class="bg-gray-800 rounded-xl p-4 shadow-md border-2 border-purple-500"
           >
             <img
-              :src="badge.image"
+              :src="badge.iconUrl"
               alt="badge"
               class="w-20 h-20 mx-auto mb-2 object-contain"
             />
@@ -41,24 +41,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from "vue";
-import { useRoute } from "vue-router";
+import { computed, onMounted } from "vue";
 import { useI18n } from "vue-i18n";
-import { useUserService } from "@/services/userService";
 import { useUIStore } from "@/stores/ui";
+import { useUserStore } from "@/stores/user";
 
 const { t } = useI18n();
 const ui = useUIStore();
-const { getUserById } = useUserService();
-const route = useRoute();
+const userStore = useUserStore();
 
-const user = ref<any>(null);
-
-onMounted(async () => {
-  const id = route.params.id as string;
-  const response = await getUserById(id);
-  user.value = response.user;
+onMounted(() => {
+  userStore.loadFromStorage();
+  console.log("🔍 Badges cargados del store:", userStore.user?.badges);
 });
+
+const user = computed(() => userStore.user);
 
 const titleClass = computed(() => {
   return ui.theme === "neon" ? "text-neon-pink" : "text-purple-400";
