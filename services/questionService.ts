@@ -1,21 +1,5 @@
 import { useUserStore } from "@/stores/user";
-
-export type Question = {
-  _id?: string;
-  quiz: string;
-  questionText: string;
-  options: string[];
-  correctAnswer: string;
-  timeLimit?: number;
-  translations?: Record<
-    string,
-    {
-      questionText: string;
-      options: string[];
-      correctAnswer: string;
-    }
-  >;
-};
+import type { Question } from "@/types/question";
 
 export const useQuestionService = () => {
   const api = useNuxtApp().$api;
