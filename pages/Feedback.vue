@@ -1,7 +1,7 @@
 <template>
   <div class="w-full flex justify-center px-4 py-20">
     <div class="w-full max-w-4xl">
-      <!-- Título -->
+      <!-- Título principal de la página -->
       <h1
         class="text-4xl md:text-5xl font-gamer mb-10 text-center"
         :class="titleClass"
@@ -14,16 +14,15 @@
         v-model="searchQuery"
         :placeholder="$t('feedback.searchPlaceholder')"
         class="w-full mb-10 px-4 py-3 rounded-lg border-2 focus:outline-none transition-all duration-200 text-lg"
-        :class="
-          ui.theme === 'neon'
-            ? 'border-neon-pink focus:ring-2 focus:ring-neon-pink bg-gray-900 text-neon-pink placeholder-neon-pink'
-            : 'border-gray-300 bg-white text-gray-900'
-        "
+        :class="searchInputClasses"
         type="text"
       />
 
       <!-- Feedbacks del usuario -->
-      <h2 class="text-2xl font-bold mb-4 mt-8" :class="subtitleClass">
+      <h2
+        class="text-2xl font-bold mb-4 mt-8 font-gamer"
+        :class="subtitleClass"
+      >
         {{ $t("feedback.yourFeedbacks") }}
       </h2>
       <div class="mb-10">
@@ -43,7 +42,7 @@
       </div>
 
       <!-- Preguntas por evaluar -->
-      <h2 class="text-2xl font-bold mb-4" :class="subtitleClass">
+      <h2 class="text-2xl font-bold mb-4 font-gamer" :class="subtitleClass">
         {{ $t("feedback.questionsToEvaluate") }}
       </h2>
       <div>
@@ -59,13 +58,14 @@
             class="mb-6"
           >
             <h3
-              class="font-gamer text-xl md:text-2xl mb-2 cursor-pointer px-2 py-2 rounded transition"
-              :class="[
-                'select-none',
+              class="font-gamer text-xl md:text-2xl mb-2 cursor-pointer px-2 py-2 rounded transition select-none"
+              :class="
                 ui.theme === 'neon'
                   ? 'bg-gray-900 text-neon-pink border-l-4 border-neon-pink shadow-neon'
-                  : 'bg-purple-100 text-purple-700',
-              ]"
+                  : ui.theme === 'dark'
+                  ? 'bg-gray-800 text-purple-400'
+                  : 'bg-purple-100 text-purple-700'
+              "
               @click="toggleGroup(group.quizTitle)"
             >
               {{ group.quizTitle }}
@@ -120,6 +120,9 @@ import FeedbackCard from "@/components/feedback/FeedbackCard.vue";
 import EvaluateModal from "@/components/feedback/EvaluateModal.vue";
 import type { Question } from "@/types/question";
 import type { QuestionFeedback } from "@/types/questionFeedback";
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
 
 const ui = useUIStore();
 
@@ -168,7 +171,7 @@ const groupedQuestions = computed(() => {
     const quizTitle =
       q.quiz && typeof q.quiz === "object" && q.quiz.title
         ? q.quiz.title
-        : "Sin título";
+        : t("feedback.unknownQuiz"); // 👈 usamos t() en vez de $t
     if (!groups[quizTitle]) groups[quizTitle] = [];
     groups[quizTitle].push(q);
   }
@@ -181,9 +184,11 @@ const groupedQuestions = computed(() => {
 const titleClass = computed(() =>
   ui.theme === "neon" ? "text-neon-pink" : "text-purple-400"
 );
-const subtitleClass = computed(() =>
-  ui.theme === "neon" ? "text-neon-pink font-gamer" : "text-purple-700"
-);
+const subtitleClass = computed(() => {
+  if (ui.theme === "neon") return "text-neon-pink";
+  if (ui.theme === "dark") return "text-purple-400";
+  return "text-purple-700";
+});
 
 const toggleGroup = (quizTitle: string) => {
   expandedGroups.value[quizTitle] = !expandedGroups.value[quizTitle];
@@ -204,13 +209,22 @@ const handleSubmitFeedback = async (data: {
     isClear: data.isClear,
     comment: data.comment,
   });
-
   feedbacks.value = await feedbackService.getMyFeedbacks();
   allQuestions.value = allQuestions.value.filter(
     (q) => q._id !== data.questionId
   );
   showModal.value = false;
 };
+
+const searchInputClasses = computed(() => {
+  if (ui.theme === "neon") {
+    return "border-neon-pink focus:ring-2 focus:ring-neon-pink bg-gray-900 text-neon-pink placeholder-neon-pink";
+  } else if (ui.theme === "dark") {
+    return "border-gray-600 bg-gray-800 text-gray-100 placeholder-gray-400 focus:ring-2 focus:ring-blue-500";
+  } else {
+    return "border-gray-300 bg-white text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-500";
+  }
+});
 </script>
 
 <style scoped>
@@ -219,7 +233,6 @@ const handleSubmitFeedback = async (data: {
 .font-gamer {
   font-family: "Press Start 2P", cursive;
 }
-
 .text-neon-pink {
   color: #ff1ad9;
 }
